@@ -1,245 +1,209 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <meta http-equiv="Content-Style-Type" content="text/css">
-  <title></title>
-  <meta name="Generator" content="Cocoa HTML Writer">
-  <meta name="CocoaVersion" content="2575.2">
-  <style type="text/css">
-    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px Menlo; color: #4689cc; -webkit-text-stroke: #4689cc}
-    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px Menlo; color: #8cd3fe; -webkit-text-stroke: #8cd3fe}
-    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px Menlo; color: #c27e65; -webkit-text-stroke: #c27e65}
-    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px Menlo; color: #cacaca; -webkit-text-stroke: #cacaca}
-    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px Menlo; color: #6d7378; -webkit-text-stroke: #6d7378}
-    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px Menlo; color: #cacaca; -webkit-text-stroke: #cacaca; min-height: 16.0px}
-    p.p7 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px Menlo; color: #36c0a0; -webkit-text-stroke: #36c0a0}
-    span.s1 {font-kerning: none; background-color: #171818}
-    span.s2 {font-kerning: none; color: #8cd3fe; background-color: #171818; -webkit-text-stroke: 0px #8cd3fe}
-    span.s3 {font-kerning: none; color: #6d6d6d; background-color: #171818; -webkit-text-stroke: 0px #6d6d6d}
-    span.s4 {font-kerning: none; color: #cacaca; background-color: #171818; -webkit-text-stroke: 0px #cacaca}
-    span.s5 {font-kerning: none; color: #c27e65; background-color: #171818; -webkit-text-stroke: 0px #c27e65}
-    span.s6 {font-kerning: none; color: #4689cc; background-color: #171818; -webkit-text-stroke: 0px #4689cc}
-    span.s7 {font-kerning: none; color: #d4d4d4; background-color: #171818; -webkit-text-stroke: 0px #d4d4d4}
-    span.s8 {font-kerning: none; color: #71c083; background-color: #171818; -webkit-text-stroke: 0px #71c083}
-    span.s9 {font-kerning: none; color: #a7c598; background-color: #171818; -webkit-text-stroke: 0px #a7c598}
-    span.s10 {font-kerning: none}
-    span.s11 {font-kerning: none; color: #b76ff7; background-color: #171818; -webkit-text-stroke: 0px #b76ff7}
-    span.s12 {font-kerning: none; color: #36c0a0; background-color: #171818; -webkit-text-stroke: 0px #36c0a0}
-    span.s13 {font-kerning: none; color: #f67c30; background-color: #171818; -webkit-text-stroke: 0px #f67c30}
-    span.s14 {font-kerning: none; color: #6d7378; background-color: #171818; -webkit-text-stroke: 0px #6d7378}
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Latvian VAT Calculator (21%)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'latvia-blue': '#164F98',
+                        'latvia-red': '#AB303F',
+                        'neutral-light': '#F7F8FA',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom styles for better aesthetics */
+        body {
+            background-color: #e5e7eb; /* Light gray background */
+            font-family: 'Inter', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 1rem;
+        }
+        .input-group input {
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+        .input-group input:focus {
+            border-color: #164F98;
+            box-shadow: 0 0 0 3px rgba(22, 79, 152, 0.3);
+        }
+        .result-card {
+            border-left: 4px solid #AB303F;
+        }
+    </style>
 </head>
 <body>
-<p class="p1"><span class="s1">&lt;!DOCTYPE</span><span class="s2"> html</span><span class="s1">&gt;</span></p>
-<p class="p1"><span class="s3">&lt;</span><span class="s1">html</span><span class="s4"> </span><span class="s2">lang</span><span class="s3">=</span><span class="s5">"en"</span><span class="s3">&gt;</span></p>
-<p class="p1"><span class="s3">&lt;</span><span class="s1">head</span><span class="s3">&gt;</span></p>
-<p class="p2"><span class="s4"><span class="Apple-converted-space">    </span></span><span class="s3">&lt;</span><span class="s6">meta</span><span class="s4"> </span><span class="s1">charset</span><span class="s3">=</span><span class="s5">"UTF-8"</span><span class="s3">&gt;</span></p>
-<p class="p3"><span class="s4"><span class="Apple-converted-space">    </span></span><span class="s3">&lt;</span><span class="s6">meta</span><span class="s4"> </span><span class="s2">name</span><span class="s3">=</span><span class="s1">"viewport"</span><span class="s4"> </span><span class="s2">content</span><span class="s3">=</span><span class="s1">"width=device-width, initial-scale=1.0"</span><span class="s3">&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">    </span></span><span class="s3">&lt;</span><span class="s6">title</span><span class="s3">&gt;</span><span class="s1">Latvian VAT Calculator (21%)</span><span class="s3">&lt;/</span><span class="s6">title</span><span class="s3">&gt;</span></p>
-<p class="p3"><span class="s4"><span class="Apple-converted-space">    </span></span><span class="s3">&lt;</span><span class="s6">script</span><span class="s4"> </span><span class="s2">src</span><span class="s3">=</span><span class="s1">"https://cdn.tailwindcss.com"</span><span class="s3">&gt;&lt;/</span><span class="s6">script</span><span class="s3">&gt;</span></p>
-<p class="p1"><span class="s4"><span class="Apple-converted-space">    </span></span><span class="s3">&lt;</span><span class="s1">script</span><span class="s3">&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">        </span>tailwind</span><span class="s7">.</span><span class="s1">config </span><span class="s7">=</span><span class="s1"> </span><span class="s7">{</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">            </span>theme</span><span class="s7">:</span><span class="s1"> </span><span class="s7">{</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                </span>extend</span><span class="s7">:</span><span class="s1"> </span><span class="s7">{</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                    </span>colors</span><span class="s7">:</span><span class="s1"> </span><span class="s7">{</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                        </span></span><span class="s8">'latvia-blue'</span><span class="s7">:</span><span class="s1"> </span><span class="s8">'#164F98'</span><span class="s7">,</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                        </span></span><span class="s8">'latvia-red'</span><span class="s7">:</span><span class="s1"> </span><span class="s8">'#AB303F'</span><span class="s7">,</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                        </span></span><span class="s8">'neutral-light'</span><span class="s7">:</span><span class="s1"> </span><span class="s8">'#F7F8FA'</span><span class="s7">,</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                    </span></span><span class="s7">},</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                    </span>fontFamily</span><span class="s7">:</span><span class="s1"> </span><span class="s7">{</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                        </span>sans</span><span class="s7">:</span><span class="s1"> </span><span class="s7">[</span><span class="s8">'Inter'</span><span class="s7">,</span><span class="s1"> </span><span class="s8">'sans-serif'</span><span class="s7">],</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                    </span></span><span class="s7">},</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                </span></span><span class="s7">}</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">            </span></span><span class="s7">}</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">        </span></span><span class="s7">}</span></p>
-<p class="p1"><span class="s4"><span class="Apple-converted-space">    </span></span><span class="s3">&lt;/</span><span class="s1">script</span><span class="s3">&gt;</span></p>
-<p class="p1"><span class="s4"><span class="Apple-converted-space">    </span></span><span class="s3">&lt;</span><span class="s1">style</span><span class="s3">&gt;</span></p>
-<p class="p5"><span class="s4"><span class="Apple-converted-space">        </span></span><span class="s1">/* Custom styles for better aesthetics */</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">        </span></span><span class="s6">body</span><span class="s1"> </span><span class="s7">{</span></p>
-<p class="p5"><span class="s4"><span class="Apple-converted-space">            </span></span><span class="s2">background-color:</span><span class="s4"> #e5e7eb</span><span class="s7">;</span><span class="s4"> </span><span class="s1">/* Light gray background */</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">            </span></span><span class="s2">font-family:</span><span class="s1"> </span><span class="s8">'Inter'</span><span class="s7">,</span><span class="s1"> </span><span class="s5">sans-serif</span><span class="s7">;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">            </span></span><span class="s2">display:</span><span class="s1"> </span><span class="s5">flex</span><span class="s7">;</span></p>
-<p class="p2"><span class="s4"><span class="Apple-converted-space">            </span></span><span class="s1">justify-content:</span><span class="s4"> </span><span class="s5">center</span><span class="s7">;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">            </span></span><span class="s2">align-items:</span><span class="s1"> </span><span class="s5">center</span><span class="s7">;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">            </span></span><span class="s2">min-height:</span><span class="s1"> </span><span class="s9">100vh</span><span class="s7">;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">            </span></span><span class="s2">padding:</span><span class="s1"> </span><span class="s9">1rem</span><span class="s7">;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">        </span></span><span class="s7">}</span></p>
-<p class="p1"><span class="s4"><span class="Apple-converted-space">        </span></span><span class="s1">.input-group</span><span class="s4"> </span><span class="s1">input</span><span class="s4"> </span><span class="s7">{</span></p>
-<p class="p3"><span class="s4"><span class="Apple-converted-space">            </span></span><span class="s2">transition:</span><span class="s4"> </span><span class="s1">border-color</span><span class="s4"> </span><span class="s9">0.2s</span><span class="s7">,</span><span class="s4"> </span><span class="s1">box-shadow</span><span class="s4"> </span><span class="s9">0.2s</span><span class="s7">;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">        </span></span><span class="s7">}</span></p>
-<p class="p1"><span class="s4"><span class="Apple-converted-space">        </span></span><span class="s1">.input-group</span><span class="s4"> </span><span class="s1">input:focus</span><span class="s4"> </span><span class="s7">{</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">            </span></span><span class="s2">border-color:</span><span class="s1"> #164F98</span><span class="s7">;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">            </span></span><span class="s2">box-shadow:</span><span class="s1"> </span><span class="s9">0</span><span class="s1"> </span><span class="s9">0</span><span class="s1"> </span><span class="s9">0</span><span class="s1"> </span><span class="s9">3px</span><span class="s1"> </span><span class="s5">rgba(</span><span class="s9">22</span><span class="s7">,</span><span class="s1"> </span><span class="s9">79</span><span class="s7">,</span><span class="s1"> </span><span class="s9">152</span><span class="s7">,</span><span class="s1"> </span><span class="s9">0.3</span><span class="s5">)</span><span class="s7">;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">        </span></span><span class="s7">}</span></p>
-<p class="p1"><span class="s4"><span class="Apple-converted-space">        </span></span><span class="s1">.result-card</span><span class="s4"> </span><span class="s7">{</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">            </span></span><span class="s2">border-left:</span><span class="s1"> </span><span class="s9">4px</span><span class="s1"> </span><span class="s5">solid</span><span class="s1"> #AB303F</span><span class="s7">;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">        </span></span><span class="s7">}</span></p>
-<p class="p1"><span class="s4"><span class="Apple-converted-space">    </span></span><span class="s3">&lt;/</span><span class="s1">style</span><span class="s3">&gt;</span></p>
-<p class="p1"><span class="s3">&lt;/</span><span class="s1">head</span><span class="s3">&gt;</span></p>
-<p class="p1"><span class="s3">&lt;</span><span class="s1">body</span><span class="s3">&gt;</span></p>
-<p class="p6"><span class="s10"></span><br></p>
-<p class="p3"><span class="s4"><span class="Apple-converted-space">    </span></span><span class="s3">&lt;</span><span class="s6">div</span><span class="s4"> </span><span class="s2">id</span><span class="s3">=</span><span class="s1">"app"</span><span class="s4"> </span><span class="s2">class</span><span class="s3">=</span><span class="s1">"w-full max-w-lg bg-white p-6 sm:p-8 rounded-xl shadow-2xl space-y-6"</span><span class="s3">&gt;</span></p>
-<p class="p6"><span class="s1"><span class="Apple-converted-space">        </span></span></p>
-<p class="p5"><span class="s4"><span class="Apple-converted-space">        </span></span><span class="s1">&lt;!-- Header --&gt;</span></p>
-<p class="p3"><span class="s4"><span class="Apple-converted-space">        </span></span><span class="s3">&lt;</span><span class="s6">header</span><span class="s4"> </span><span class="s2">class</span><span class="s3">=</span><span class="s1">"text-center pb-4 border-b border-gray-100"</span><span class="s3">&gt;</span></p>
-<p class="p3"><span class="s4"><span class="Apple-converted-space">            </span></span><span class="s3">&lt;</span><span class="s6">h1</span><span class="s4"> </span><span class="s2">class</span><span class="s3">=</span><span class="s1">"text-3xl font-extrabold text-gray-800"</span><span class="s3">&gt;</span><span class="s4">Latvian VAT Calculator</span><span class="s3">&lt;/</span><span class="s6">h1</span><span class="s3">&gt;</span></p>
-<p class="p3"><span class="s4"><span class="Apple-converted-space">            </span></span><span class="s3">&lt;</span><span class="s6">p</span><span class="s4"> </span><span class="s2">class</span><span class="s3">=</span><span class="s1">"text-latvia-red font-semibold mt-1 text-lg"</span><span class="s3">&gt;</span><span class="s4">Standard Rate: 21%</span><span class="s3">&lt;/</span><span class="s6">p</span><span class="s3">&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">        </span></span><span class="s3">&lt;/</span><span class="s6">header</span><span class="s3">&gt;</span></p>
-<p class="p6"><span class="s10"></span><br></p>
-<p class="p3"><span class="s4"><span class="Apple-converted-space">        </span></span><span class="s3">&lt;</span><span class="s6">div</span><span class="s4"> </span><span class="s2">class</span><span class="s3">=</span><span class="s1">"space-y-4"</span><span class="s3">&gt;</span></p>
-<p class="p6"><span class="s1"><span class="Apple-converted-space">            </span></span></p>
-<p class="p5"><span class="s4"><span class="Apple-converted-space">            </span></span><span class="s1">&lt;!-- Input: Price WITHOUT VAT (Net) --&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">            </span></span><span class="s3">&lt;</span><span class="s6">div</span><span class="s1"> </span><span class="s2">class</span><span class="s3">=</span><span class="s5">"input-group"</span><span class="s3">&gt;</span></p>
-<p class="p3"><span class="s4"><span class="Apple-converted-space">                </span></span><span class="s3">&lt;</span><span class="s6">label</span><span class="s4"> </span><span class="s2">for</span><span class="s3">=</span><span class="s1">"netAmount"</span><span class="s4"> </span><span class="s2">class</span><span class="s3">=</span><span class="s1">"block text-sm font-medium text-gray-700 mb-1"</span><span class="s3">&gt;</span><span class="s4">Price WITHOUT VAT (Net Price)</span><span class="s3">&lt;/</span><span class="s6">label</span><span class="s3">&gt;</span></p>
-<p class="p3"><span class="s4"><span class="Apple-converted-space">                </span></span><span class="s3">&lt;</span><span class="s6">div</span><span class="s4"> </span><span class="s2">class</span><span class="s3">=</span><span class="s1">"relative rounded-lg shadow-sm"</span><span class="s3">&gt;</span></p>
-<p class="p3"><span class="s4"><span class="Apple-converted-space">                    </span></span><span class="s3">&lt;</span><span class="s6">div</span><span class="s4"> </span><span class="s2">class</span><span class="s3">=</span><span class="s1">"pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3"</span><span class="s3">&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                        </span></span><span class="s3">&lt;</span><span class="s6">span</span><span class="s1"> </span><span class="s2">class</span><span class="s3">=</span><span class="s5">"text-gray-500"</span><span class="s3">&gt;</span><span class="s1">€</span><span class="s3">&lt;/</span><span class="s6">span</span><span class="s3">&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                    </span></span><span class="s3">&lt;/</span><span class="s6">div</span><span class="s3">&gt;</span></p>
-<p class="p3"><span class="s4"><span class="Apple-converted-space">                    </span></span><span class="s3">&lt;</span><span class="s6">input</span><span class="s4"> </span><span class="s2">type</span><span class="s3">=</span><span class="s1">"number"</span><span class="s4"> </span><span class="s2">id</span><span class="s3">=</span><span class="s1">"netAmount"</span><span class="s4"> </span><span class="s2">placeholder</span><span class="s3">=</span><span class="s1">"Enter amount"</span><span class="s4"> </span><span class="s2">oninput</span><span class="s3">=</span><span class="s1">"handleInput('net')"</span></p>
-<p class="p3"><span class="s4"><span class="Apple-converted-space">                           </span></span><span class="s2">class</span><span class="s3">=</span><span class="s1">"block w-full rounded-lg border border-gray-300 pl-10 pr-4 py-2 text-lg focus:outline-none"</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                           </span></span><span class="s2">min</span><span class="s3">=</span><span class="s5">"0"</span><span class="s1"> </span><span class="s2">step</span><span class="s3">=</span><span class="s5">"0.01"</span><span class="s3">&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                </span></span><span class="s3">&lt;/</span><span class="s6">div</span><span class="s3">&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">            </span></span><span class="s3">&lt;/</span><span class="s6">div</span><span class="s3">&gt;</span></p>
-<p class="p6"><span class="s10"></span><br></p>
-<p class="p3"><span class="s4"><span class="Apple-converted-space">            </span></span><span class="s3">&lt;</span><span class="s6">div</span><span class="s4"> </span><span class="s2">class</span><span class="s3">=</span><span class="s1">"text-center text-lg font-bold text-gray-500"</span><span class="s3">&gt;</span><span class="s4">OR</span><span class="s3">&lt;/</span><span class="s6">div</span><span class="s3">&gt;</span></p>
-<p class="p6"><span class="s10"></span><br></p>
-<p class="p5"><span class="s4"><span class="Apple-converted-space">            </span></span><span class="s1">&lt;!-- Input: Price INCLUDING VAT (Gross) --&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">            </span></span><span class="s3">&lt;</span><span class="s6">div</span><span class="s1"> </span><span class="s2">class</span><span class="s3">=</span><span class="s5">"input-group"</span><span class="s3">&gt;</span></p>
-<p class="p3"><span class="s4"><span class="Apple-converted-space">                </span></span><span class="s3">&lt;</span><span class="s6">label</span><span class="s4"> </span><span class="s2">for</span><span class="s3">=</span><span class="s1">"grossAmount"</span><span class="s4"> </span><span class="s2">class</span><span class="s3">=</span><span class="s1">"block text-sm font-medium text-gray-700 mb-1"</span><span class="s3">&gt;</span><span class="s4">Price INCLUDING VAT (Gross Price)</span><span class="s3">&lt;/</span><span class="s6">label</span><span class="s3">&gt;</span></p>
-<p class="p3"><span class="s4"><span class="Apple-converted-space">                </span></span><span class="s3">&lt;</span><span class="s6">div</span><span class="s4"> </span><span class="s2">class</span><span class="s3">=</span><span class="s1">"relative rounded-lg shadow-sm"</span><span class="s3">&gt;</span></p>
-<p class="p3"><span class="s4"><span class="Apple-converted-space">                    </span></span><span class="s3">&lt;</span><span class="s6">div</span><span class="s4"> </span><span class="s2">class</span><span class="s3">=</span><span class="s1">"pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3"</span><span class="s3">&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                        </span></span><span class="s3">&lt;</span><span class="s6">span</span><span class="s1"> </span><span class="s2">class</span><span class="s3">=</span><span class="s5">"text-gray-500"</span><span class="s3">&gt;</span><span class="s1">€</span><span class="s3">&lt;/</span><span class="s6">span</span><span class="s3">&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                    </span></span><span class="s3">&lt;/</span><span class="s6">div</span><span class="s3">&gt;</span></p>
-<p class="p3"><span class="s4"><span class="Apple-converted-space">                    </span></span><span class="s3">&lt;</span><span class="s6">input</span><span class="s4"> </span><span class="s2">type</span><span class="s3">=</span><span class="s1">"number"</span><span class="s4"> </span><span class="s2">id</span><span class="s3">=</span><span class="s1">"grossAmount"</span><span class="s4"> </span><span class="s2">placeholder</span><span class="s3">=</span><span class="s1">"Enter amount"</span><span class="s4"> </span><span class="s2">oninput</span><span class="s3">=</span><span class="s1">"handleInput('gross')"</span></p>
-<p class="p3"><span class="s4"><span class="Apple-converted-space">                           </span></span><span class="s2">class</span><span class="s3">=</span><span class="s1">"block w-full rounded-lg border border-gray-300 pl-10 pr-4 py-2 text-lg focus:outline-none"</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                           </span></span><span class="s2">min</span><span class="s3">=</span><span class="s5">"0"</span><span class="s1"> </span><span class="s2">step</span><span class="s3">=</span><span class="s5">"0.01"</span><span class="s3">&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                </span></span><span class="s3">&lt;/</span><span class="s6">div</span><span class="s3">&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">            </span></span><span class="s3">&lt;/</span><span class="s6">div</span><span class="s3">&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">        </span></span><span class="s3">&lt;/</span><span class="s6">div</span><span class="s3">&gt;</span></p>
-<p class="p6"><span class="s10"></span><br></p>
-<p class="p5"><span class="s4"><span class="Apple-converted-space">        </span></span><span class="s1">&lt;!-- Results Display --&gt;</span></p>
-<p class="p3"><span class="s4"><span class="Apple-converted-space">        </span></span><span class="s3">&lt;</span><span class="s6">div</span><span class="s4"> </span><span class="s2">id</span><span class="s3">=</span><span class="s1">"results"</span><span class="s4"> </span><span class="s2">class</span><span class="s3">=</span><span class="s1">"space-y-4 pt-4 border-t border-gray-100"</span><span class="s3">&gt;</span></p>
-<p class="p3"><span class="s4"><span class="Apple-converted-space">            </span></span><span class="s3">&lt;</span><span class="s6">h2</span><span class="s4"> </span><span class="s2">class</span><span class="s3">=</span><span class="s1">"text-xl font-semibold text-latvia-blue"</span><span class="s3">&gt;</span><span class="s4">Calculation Results</span><span class="s3">&lt;/</span><span class="s6">h2</span><span class="s3">&gt;</span></p>
-<p class="p6"><span class="s1"><span class="Apple-converted-space">            </span></span></p>
-<p class="p5"><span class="s4"><span class="Apple-converted-space">            </span></span><span class="s1">&lt;!-- VAT Amount --&gt;</span></p>
-<p class="p3"><span class="s4"><span class="Apple-converted-space">            </span></span><span class="s3">&lt;</span><span class="s6">div</span><span class="s4"> </span><span class="s2">class</span><span class="s3">=</span><span class="s1">"result-card bg-neutral-light p-4 rounded-lg shadow-inner flex justify-between items-center"</span><span class="s3">&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                </span></span><span class="s3">&lt;</span><span class="s6">span</span><span class="s1"> </span><span class="s2">class</span><span class="s3">=</span><span class="s5">"font-medium text-gray-700"</span><span class="s3">&gt;</span><span class="s1">VAT (21%) Amount:</span><span class="s3">&lt;/</span><span class="s6">span</span><span class="s3">&gt;</span></p>
-<p class="p3"><span class="s4"><span class="Apple-converted-space">                </span></span><span class="s3">&lt;</span><span class="s6">span</span><span class="s4"> </span><span class="s2">id</span><span class="s3">=</span><span class="s1">"vatAmountDisplay"</span><span class="s4"> </span><span class="s2">class</span><span class="s3">=</span><span class="s1">"text-2xl font-bold text-latvia-red"</span><span class="s3">&gt;</span><span class="s4">€0.00</span><span class="s3">&lt;/</span><span class="s6">span</span><span class="s3">&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">            </span></span><span class="s3">&lt;/</span><span class="s6">div</span><span class="s3">&gt;</span></p>
-<p class="p6"><span class="s1"><span class="Apple-converted-space">            </span></span></p>
-<p class="p5"><span class="s4"><span class="Apple-converted-space">            </span></span><span class="s1">&lt;!-- Net Price --&gt;</span></p>
-<p class="p3"><span class="s4"><span class="Apple-converted-space">            </span></span><span class="s3">&lt;</span><span class="s6">div</span><span class="s4"> </span><span class="s2">class</span><span class="s3">=</span><span class="s1">"result-card bg-neutral-light p-4 rounded-lg shadow-inner flex justify-between items-center"</span><span class="s3">&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                </span></span><span class="s3">&lt;</span><span class="s6">span</span><span class="s1"> </span><span class="s2">class</span><span class="s3">=</span><span class="s5">"font-medium text-gray-700"</span><span class="s3">&gt;</span><span class="s1">Net Price:</span><span class="s3">&lt;/</span><span class="s6">span</span><span class="s3">&gt;</span></p>
-<p class="p3"><span class="s4"><span class="Apple-converted-space">                </span></span><span class="s3">&lt;</span><span class="s6">span</span><span class="s4"> </span><span class="s2">id</span><span class="s3">=</span><span class="s1">"netResultDisplay"</span><span class="s4"> </span><span class="s2">class</span><span class="s3">=</span><span class="s1">"text-xl font-bold text-gray-800"</span><span class="s3">&gt;</span><span class="s4">€0.00</span><span class="s3">&lt;/</span><span class="s6">span</span><span class="s3">&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">            </span></span><span class="s3">&lt;/</span><span class="s6">div</span><span class="s3">&gt;</span></p>
-<p class="p6"><span class="s10"></span><br></p>
-<p class="p5"><span class="s4"><span class="Apple-converted-space">            </span></span><span class="s1">&lt;!-- Gross Price --&gt;</span></p>
-<p class="p3"><span class="s4"><span class="Apple-converted-space">            </span></span><span class="s3">&lt;</span><span class="s6">div</span><span class="s4"> </span><span class="s2">class</span><span class="s3">=</span><span class="s1">"result-card bg-neutral-light p-4 rounded-lg shadow-inner flex justify-between items-center"</span><span class="s3">&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                </span></span><span class="s3">&lt;</span><span class="s6">span</span><span class="s1"> </span><span class="s2">class</span><span class="s3">=</span><span class="s5">"font-medium text-gray-700"</span><span class="s3">&gt;</span><span class="s1">Gross Price:</span><span class="s3">&lt;/</span><span class="s6">span</span><span class="s3">&gt;</span></p>
-<p class="p3"><span class="s4"><span class="Apple-converted-space">                </span></span><span class="s3">&lt;</span><span class="s6">span</span><span class="s4"> </span><span class="s2">id</span><span class="s3">=</span><span class="s1">"grossResultDisplay"</span><span class="s4"> </span><span class="s2">class</span><span class="s3">=</span><span class="s1">"text-xl font-bold text-gray-800"</span><span class="s3">&gt;</span><span class="s4">€0.00</span><span class="s3">&lt;/</span><span class="s6">span</span><span class="s3">&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">            </span></span><span class="s3">&lt;/</span><span class="s6">div</span><span class="s3">&gt;</span></p>
-<p class="p6"><span class="s1"><span class="Apple-converted-space">            </span></span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">        </span></span><span class="s3">&lt;/</span><span class="s6">div</span><span class="s3">&gt;</span></p>
-<p class="p6"><span class="s10"></span><br></p>
-<p class="p5"><span class="s4"><span class="Apple-converted-space">        </span></span><span class="s1">&lt;!-- Error/Info Message Box --&gt;</span></p>
-<p class="p3"><span class="s4"><span class="Apple-converted-space">        </span></span><span class="s3">&lt;</span><span class="s6">div</span><span class="s4"> </span><span class="s2">id</span><span class="s3">=</span><span class="s1">"messageBox"</span><span class="s4"> </span><span class="s2">class</span><span class="s3">=</span><span class="s1">"hidden p-3 rounded-lg bg-yellow-100 text-yellow-700 border border-yellow-300 text-sm"</span><span class="s3">&gt;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">            </span>Please enter a positive numeric value in one of the fields.</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">        </span></span><span class="s3">&lt;/</span><span class="s6">div</span><span class="s3">&gt;</span></p>
-<p class="p6"><span class="s1"><span class="Apple-converted-space">        </span></span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">    </span></span><span class="s3">&lt;/</span><span class="s6">div</span><span class="s3">&gt;</span></p>
-<p class="p6"><span class="s10"></span><br></p>
-<p class="p1"><span class="s4"><span class="Apple-converted-space">    </span></span><span class="s3">&lt;</span><span class="s1">script</span><span class="s3">&gt;</span></p>
-<p class="p5"><span class="s4"><span class="Apple-converted-space">        </span></span><span class="s1">// Constants for Latvian VAT</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">        </span></span><span class="s11">const</span><span class="s1"> </span><span class="s12">VAT_RATE</span><span class="s1"> </span><span class="s7">=</span><span class="s1"> </span><span class="s13">0.21</span><span class="s7">;</span><span class="s1"> </span><span class="s14">// 21%</span></p>
-<p class="p7"><span class="s4"><span class="Apple-converted-space">        </span></span><span class="s11">const</span><span class="s4"> </span><span class="s1">VAT_FACTOR</span><span class="s4"> </span><span class="s7">=</span><span class="s4"> </span><span class="s13">1</span><span class="s4"> </span><span class="s7">+</span><span class="s4"> </span><span class="s1">VAT_RATE</span><span class="s7">;</span></p>
-<p class="p6"><span class="s10"></span><br></p>
-<p class="p5"><span class="s4"><span class="Apple-converted-space">        </span></span><span class="s1">// Get DOM elements</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">        </span></span><span class="s11">const</span><span class="s1"> netInput </span><span class="s7">=</span><span class="s1"> document</span><span class="s7">.</span><span class="s1">getElementById</span><span class="s7">(</span><span class="s8">'netAmount'</span><span class="s7">);</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">        </span></span><span class="s11">const</span><span class="s1"> grossInput </span><span class="s7">=</span><span class="s1"> document</span><span class="s7">.</span><span class="s1">getElementById</span><span class="s7">(</span><span class="s8">'grossAmount'</span><span class="s7">);</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">        </span></span><span class="s11">const</span><span class="s1"> vatDisplay </span><span class="s7">=</span><span class="s1"> document</span><span class="s7">.</span><span class="s1">getElementById</span><span class="s7">(</span><span class="s8">'vatAmountDisplay'</span><span class="s7">);</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">        </span></span><span class="s11">const</span><span class="s1"> netResultDisplay </span><span class="s7">=</span><span class="s1"> document</span><span class="s7">.</span><span class="s1">getElementById</span><span class="s7">(</span><span class="s8">'netResultDisplay'</span><span class="s7">);</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">        </span></span><span class="s11">const</span><span class="s1"> grossResultDisplay </span><span class="s7">=</span><span class="s1"> document</span><span class="s7">.</span><span class="s1">getElementById</span><span class="s7">(</span><span class="s8">'grossResultDisplay'</span><span class="s7">);</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">        </span></span><span class="s11">const</span><span class="s1"> messageBox </span><span class="s7">=</span><span class="s1"> document</span><span class="s7">.</span><span class="s1">getElementById</span><span class="s7">(</span><span class="s8">'messageBox'</span><span class="s7">);</span></p>
-<p class="p6"><span class="s10"></span><br></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">        </span></span><span class="s14">/**</span></p>
-<p class="p5"><span class="s1"><span class="Apple-converted-space">         </span>* Formats a number to a currency string with 2 decimal places and the Euro symbol.</span></p>
-<p class="p5"><span class="s1"><span class="Apple-converted-space">         </span>* @param {number} amount - The numeric amount.</span></p>
-<p class="p5"><span class="s1"><span class="Apple-converted-space">         </span>* @returns {string} - The formatted string (e.g., "€12.34").</span></p>
-<p class="p5"><span class="s1"><span class="Apple-converted-space">         </span>*/</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">        </span></span><span class="s11">const</span><span class="s1"> formatCurrency </span><span class="s7">=</span><span class="s1"> </span><span class="s7">(</span><span class="s1">amount</span><span class="s7">)</span><span class="s1"> </span><span class="s7">=&gt;</span><span class="s1"> </span><span class="s7">{</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">            </span></span><span class="s11">if</span><span class="s1"> </span><span class="s7">(</span><span class="s1">isNaN</span><span class="s7">(</span><span class="s1">amount</span><span class="s7">)</span><span class="s1"> </span><span class="s7">||</span><span class="s1"> amount </span><span class="s7">===</span><span class="s1"> </span><span class="s11">null</span><span class="s7">)</span><span class="s1"> </span><span class="s11">return</span><span class="s1"> </span><span class="s8">'€0.00'</span><span class="s7">;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">            </span></span><span class="s11">return</span><span class="s1"> </span><span class="s8">`€</span><span class="s7">${</span><span class="s1">amount</span><span class="s7">.</span><span class="s1">toFixed</span><span class="s7">(</span><span class="s13">2</span><span class="s7">)}</span><span class="s8">`</span><span class="s7">;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">        </span></span><span class="s7">};</span></p>
-<p class="p6"><span class="s10"></span><br></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">        </span></span><span class="s14">/**</span></p>
-<p class="p5"><span class="s1"><span class="Apple-converted-space">         </span>* Clears all displays and results.</span></p>
-<p class="p5"><span class="s1"><span class="Apple-converted-space">         </span>*/</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">        </span></span><span class="s11">const</span><span class="s1"> clearResults </span><span class="s7">=</span><span class="s1"> </span><span class="s7">()</span><span class="s1"> </span><span class="s7">=&gt;</span><span class="s1"> </span><span class="s7">{</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">            </span>vatDisplay</span><span class="s7">.</span><span class="s1">textContent </span><span class="s7">=</span><span class="s1"> formatCurrency</span><span class="s7">(</span><span class="s13">0</span><span class="s7">);</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">            </span>netResultDisplay</span><span class="s7">.</span><span class="s1">textContent </span><span class="s7">=</span><span class="s1"> formatCurrency</span><span class="s7">(</span><span class="s13">0</span><span class="s7">);</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">            </span>grossResultDisplay</span><span class="s7">.</span><span class="s1">textContent </span><span class="s7">=</span><span class="s1"> formatCurrency</span><span class="s7">(</span><span class="s13">0</span><span class="s7">);</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">            </span>messageBox</span><span class="s7">.</span><span class="s1">classList</span><span class="s7">.</span><span class="s1">add</span><span class="s7">(</span><span class="s8">'hidden'</span><span class="s7">);</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">        </span></span><span class="s7">};</span></p>
-<p class="p6"><span class="s10"></span><br></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">        </span></span><span class="s14">/**</span></p>
-<p class="p5"><span class="s1"><span class="Apple-converted-space">         </span>* Main calculation handler.</span></p>
-<p class="p5"><span class="s1"><span class="Apple-converted-space">         </span>* @param {string} source - 'net' or 'gross' to indicate which field triggered the calculation.</span></p>
-<p class="p5"><span class="s1"><span class="Apple-converted-space">         </span>*/</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">        </span></span><span class="s11">function</span><span class="s1"> handleInput</span><span class="s7">(</span><span class="s1">source</span><span class="s7">)</span><span class="s1"> </span><span class="s7">{</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">            </span></span><span class="s11">let</span><span class="s1"> inputElement </span><span class="s7">=</span><span class="s1"> </span><span class="s7">(</span><span class="s1">source </span><span class="s7">===</span><span class="s1"> </span><span class="s8">'net'</span><span class="s7">)</span><span class="s1"> </span><span class="s7">?</span><span class="s1"> netInput </span><span class="s7">:</span><span class="s1"> grossInput</span><span class="s7">;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">            </span></span><span class="s11">let</span><span class="s1"> value </span><span class="s7">=</span><span class="s1"> parseFloat</span><span class="s7">(</span><span class="s1">inputElement</span><span class="s7">.</span><span class="s1">value</span><span class="s7">);</span></p>
-<p class="p6"><span class="s10"></span><br></p>
-<p class="p5"><span class="s4"><span class="Apple-converted-space">            </span></span><span class="s1">// Clear the other input field to ensure only one calculation path is active</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">            </span></span><span class="s11">if</span><span class="s1"> </span><span class="s7">(</span><span class="s1">source </span><span class="s7">===</span><span class="s1"> </span><span class="s8">'net'</span><span class="s7">)</span><span class="s1"> </span><span class="s7">{</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                </span>grossInput</span><span class="s7">.</span><span class="s1">value </span><span class="s7">=</span><span class="s1"> </span><span class="s8">''</span><span class="s7">;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">            </span></span><span class="s7">}</span><span class="s1"> </span><span class="s11">else</span><span class="s1"> </span><span class="s7">{</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                </span>netInput</span><span class="s7">.</span><span class="s1">value </span><span class="s7">=</span><span class="s1"> </span><span class="s8">''</span><span class="s7">;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">            </span></span><span class="s7">}</span></p>
-<p class="p6"><span class="s1"><span class="Apple-converted-space">            </span></span></p>
-<p class="p5"><span class="s4"><span class="Apple-converted-space">            </span></span><span class="s1">// Handle invalid or empty input</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">            </span></span><span class="s11">if</span><span class="s1"> </span><span class="s7">(</span><span class="s1">isNaN</span><span class="s7">(</span><span class="s1">value</span><span class="s7">)</span><span class="s1"> </span><span class="s7">||</span><span class="s1"> value </span><span class="s7">&lt;=</span><span class="s1"> </span><span class="s13">0</span><span class="s7">)</span><span class="s1"> </span><span class="s7">{</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                </span>clearResults</span><span class="s7">();</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                </span></span><span class="s11">if</span><span class="s1"> </span><span class="s7">(</span><span class="s1">inputElement</span><span class="s7">.</span><span class="s1">value </span><span class="s7">!==</span><span class="s1"> </span><span class="s8">''</span><span class="s7">)</span><span class="s1"> </span><span class="s7">{</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                    </span>messageBox</span><span class="s7">.</span><span class="s1">classList</span><span class="s7">.</span><span class="s1">remove</span><span class="s7">(</span><span class="s8">'hidden'</span><span class="s7">);</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                </span></span><span class="s7">}</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                </span></span><span class="s11">return</span><span class="s7">;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">            </span></span><span class="s7">}</span></p>
-<p class="p6"><span class="s10"></span><br></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">            </span>messageBox</span><span class="s7">.</span><span class="s1">classList</span><span class="s7">.</span><span class="s1">add</span><span class="s7">(</span><span class="s8">'hidden'</span><span class="s7">);</span></p>
-<p class="p6"><span class="s10"></span><br></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">            </span></span><span class="s11">let</span><span class="s1"> net </span><span class="s7">=</span><span class="s1"> </span><span class="s13">0</span><span class="s7">;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">            </span></span><span class="s11">let</span><span class="s1"> gross </span><span class="s7">=</span><span class="s1"> </span><span class="s13">0</span><span class="s7">;</span></p>
-<p class="p6"><span class="s1"><span class="Apple-converted-space">            </span></span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">            </span></span><span class="s11">if</span><span class="s1"> </span><span class="s7">(</span><span class="s1">source </span><span class="s7">===</span><span class="s1"> </span><span class="s8">'net'</span><span class="s7">)</span><span class="s1"> </span><span class="s7">{</span></p>
-<p class="p5"><span class="s4"><span class="Apple-converted-space">                </span></span><span class="s1">// Calculation: Net to Gross</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                </span>net </span><span class="s7">=</span><span class="s1"> value</span><span class="s7">;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                </span>gross </span><span class="s7">=</span><span class="s1"> net </span><span class="s7">*</span><span class="s1"> </span><span class="s12">VAT_FACTOR</span><span class="s7">;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">            </span></span><span class="s7">}</span><span class="s1"> </span><span class="s11">else</span><span class="s1"> </span><span class="s7">{</span></p>
-<p class="p5"><span class="s4"><span class="Apple-converted-space">                </span></span><span class="s1">// Calculation: Gross to Net</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                </span>gross </span><span class="s7">=</span><span class="s1"> value</span><span class="s7">;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">                </span>net </span><span class="s7">=</span><span class="s1"> gross </span><span class="s7">/</span><span class="s1"> </span><span class="s12">VAT_FACTOR</span><span class="s7">;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">            </span></span><span class="s7">}</span></p>
-<p class="p6"><span class="s10"></span><br></p>
-<p class="p5"><span class="s4"><span class="Apple-converted-space">            </span></span><span class="s1">// Calculate VAT amount</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">            </span></span><span class="s11">const</span><span class="s1"> vatAmount </span><span class="s7">=</span><span class="s1"> gross </span><span class="s7">-</span><span class="s1"> net</span><span class="s7">;</span></p>
-<p class="p6"><span class="s10"></span><br></p>
-<p class="p5"><span class="s4"><span class="Apple-converted-space">            </span></span><span class="s1">// Update displays</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">            </span>vatDisplay</span><span class="s7">.</span><span class="s1">textContent </span><span class="s7">=</span><span class="s1"> formatCurrency</span><span class="s7">(</span><span class="s1">vatAmount</span><span class="s7">);</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">            </span>netResultDisplay</span><span class="s7">.</span><span class="s1">textContent </span><span class="s7">=</span><span class="s1"> formatCurrency</span><span class="s7">(</span><span class="s1">net</span><span class="s7">);</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">            </span>grossResultDisplay</span><span class="s7">.</span><span class="s1">textContent </span><span class="s7">=</span><span class="s1"> formatCurrency</span><span class="s7">(</span><span class="s1">gross</span><span class="s7">);</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">        </span></span><span class="s7">}</span></p>
-<p class="p6"><span class="s10"></span><br></p>
-<p class="p5"><span class="s4"><span class="Apple-converted-space">        </span></span><span class="s1">// Initialize display on load</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">        </span>clearResults</span><span class="s7">();</span></p>
-<p class="p6"><span class="s10"></span><br></p>
-<p class="p5"><span class="s4"><span class="Apple-converted-space">        </span></span><span class="s1">// Optional: Pre-populate an initial value for demonstration</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">        </span>netInput</span><span class="s7">.</span><span class="s1">value </span><span class="s7">=</span><span class="s1"> </span><span class="s8">'100.00'</span><span class="s7">;</span></p>
-<p class="p4"><span class="s1"><span class="Apple-converted-space">        </span>handleInput</span><span class="s7">(</span><span class="s8">'net'</span><span class="s7">);</span></p>
-<p class="p6"><span class="s10"></span><br></p>
-<p class="p1"><span class="s4"><span class="Apple-converted-space">    </span></span><span class="s3">&lt;/</span><span class="s1">script</span><span class="s3">&gt;</span></p>
-<p class="p1"><span class="s3">&lt;/</span><span class="s1">body</span><span class="s3">&gt;</span></p>
-<p class="p1"><span class="s3">&lt;/</span><span class="s1">html</span><span class="s3">&gt;</span></p>
-<p class="p6"><span class="s10"></span><br></p>
+
+    <div id="app" class="w-full max-w-lg bg-white p-6 sm:p-8 rounded-xl shadow-2xl space-y-6">
+        
+        <!-- Header -->
+        <header class="text-center pb-4 border-b border-gray-100">
+            <h1 class="text-3xl font-extrabold text-gray-800">Latvian VAT Calculator</h1>
+            <p class="text-latvia-red font-semibold mt-1 text-lg">Standard Rate: 21%</p>
+        </header>
+
+        <div class="space-y-4">
+            
+            <!-- Input: Price WITHOUT VAT (Net) -->
+            <div class="input-group">
+                <label for="netAmount" class="block text-sm font-medium text-gray-700 mb-1">Price WITHOUT VAT (Net Price)</label>
+                <div class="relative rounded-lg shadow-sm">
+                    <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                        <span class="text-gray-500">€</span>
+                    </div>
+                    <input type="number" id="netAmount" placeholder="Enter amount" oninput="handleInput('net')"
+                           class="block w-full rounded-lg border border-gray-300 pl-10 pr-4 py-2 text-lg focus:outline-none"
+                           min="0" step="0.01">
+                </div>
+            </div>
+
+            <div class="text-center text-lg font-bold text-gray-500">OR</div>
+
+            <!-- Input: Price INCLUDING VAT (Gross) -->
+            <div class="input-group">
+                <label for="grossAmount" class="block text-sm font-medium text-gray-700 mb-1">Price INCLUDING VAT (Gross Price)</label>
+                <div class="relative rounded-lg shadow-sm">
+                    <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                        <span class="text-gray-500">€</span>
+                    </div>
+                    <input type="number" id="grossAmount" placeholder="Enter amount" oninput="handleInput('gross')"
+                           class="block w-full rounded-lg border border-gray-300 pl-10 pr-4 py-2 text-lg focus:outline-none"
+                           min="0" step="0.01">
+                </div>
+            </div>
+        </div>
+
+        <!-- Results Display -->
+        <div id="results" class="space-y-4 pt-4 border-t border-gray-100">
+            <h2 class="text-xl font-semibold text-latvia-blue">Calculation Results</h2>
+            
+            <!-- VAT Amount -->
+            <div class="result-card bg-neutral-light p-4 rounded-lg shadow-inner flex justify-between items-center">
+                <span class="font-medium text-gray-700">VAT (21%) Amount:</span>
+                <span id="vatAmountDisplay" class="text-2xl font-bold text-latvia-red">€0.00</span>
+            </div>
+            
+            <!-- Net Price -->
+            <div class="result-card bg-neutral-light p-4 rounded-lg shadow-inner flex justify-between items-center">
+                <span class="font-medium text-gray-700">Net Price:</span>
+                <span id="netResultDisplay" class="text-xl font-bold text-gray-800">€0.00</span>
+            </div>
+
+            <!-- Gross Price -->
+            <div class="result-card bg-neutral-light p-4 rounded-lg shadow-inner flex justify-between items-center">
+                <span class="font-medium text-gray-700">Gross Price:</span>
+                <span id="grossResultDisplay" class="text-xl font-bold text-gray-800">€0.00</span>
+            </div>
+            
+        </div>
+
+        <!-- Error/Info Message Box -->
+        <div id="messageBox" class="hidden p-3 rounded-lg bg-yellow-100 text-yellow-700 border border-yellow-300 text-sm">
+            Please enter a positive numeric value in one of the fields.
+        </div>
+        
+    </div>
+
+    <script>
+        // Constants for Latvian VAT
+        const VAT_RATE = 0.21; // 21%
+        const VAT_FACTOR = 1 + VAT_RATE;
+
+        // Get DOM elements
+        const netInput = document.getElementById('netAmount');
+        const grossInput = document.getElementById('grossAmount');
+        const vatDisplay = document.getElementById('vatAmountDisplay');
+        const netResultDisplay = document.getElementById('netResultDisplay');
+        const grossResultDisplay = document.getElementById('grossResultDisplay');
+        const messageBox = document.getElementById('messageBox');
+
+        /**
+         * Formats a number to a currency string with 2 decimal places and the Euro symbol.
+         * @param {number} amount - The numeric amount.
+         * @returns {string} - The formatted string (e.g., "€12.34").
+         */
+        const formatCurrency = (amount) => {
+            if (isNaN(amount) || amount === null) return '€0.00';
+            return `€${amount.toFixed(2)}`;
+        };
+
+        /**
+         * Clears all displays and results.
+         */
+        const clearResults = () => {
+            vatDisplay.textContent = formatCurrency(0);
+            netResultDisplay.textContent = formatCurrency(0);
+            grossResultDisplay.textContent = formatCurrency(0);
+            messageBox.classList.add('hidden');
+        };
+
+        /**
+         * Main calculation handler.
+         * @param {string} source - 'net' or 'gross' to indicate which field triggered the calculation.
+         */
+        function handleInput(source) {
+            let inputElement = (source === 'net') ? netInput : grossInput;
+            let value = parseFloat(inputElement.value);
+
+            // Clear the other input field to ensure only one calculation path is active
+            if (source === 'net') {
+                grossInput.value = '';
+            } else {
+                netInput.value = '';
+            }
+            
+            // Handle invalid or empty input
+            if (isNaN(value) || value <= 0) {
+                clearResults();
+                if (inputElement.value !== '') {
+                    messageBox.classList.remove('hidden');
+                }
+                return;
+            }
+
+            messageBox.classList.add('hidden');
+
+            let net = 0;
+            let gross = 0;
+            
+            if (source === 'net') {
+                // Calculation: Net to Gross
+                net = value;
+                gross = net * VAT_FACTOR;
+            } else {
+                // Calculation: Gross to Net
+                gross = value;
+                net = gross / VAT_FACTOR;
+            }
+
+            // Calculate VAT amount
+            const vatAmount = gross - net;
+
+            // Update displays
+            vatDisplay.textContent = formatCurrency(vatAmount);
+            netResultDisplay.textContent = formatCurrency(net);
+            grossResultDisplay.textContent = formatCurrency(gross);
+        }
+
+        // Initialize display on load
+        clearResults();
+
+        // Optional: Pre-populate an initial value for demonstration
+        netInput.value = '100.00';
+        handleInput('net');
+
+    </script>
 </body>
 </html>
