@@ -3,206 +3,286 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Latvian VAT Calculator (21%)</title>
+    <title>Latvijas Nodokļu Kalkulatori (EUR)</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        'latvia-blue': '#164F98',
-                        'latvia-red': '#AB303F',
-                        'neutral-light': '#F7F8FA',
-                    },
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                    },
-                }
-            }
-        }
-    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
-        /* Custom styles for better aesthetics */
         body {
-            background-color: #e5e7eb; /* Light gray background */
             font-family: 'Inter', sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            padding: 1rem;
+            background-color: #f3f4f6;
         }
-        .input-group input {
-            transition: border-color 0.2s, box-shadow 0.2s;
-        }
-        .input-group input:focus {
-            border-color: #164F98;
-            box-shadow: 0 0 0 3px rgba(22, 79, 152, 0.3);
-        }
-        .result-card {
-            border-left: 4px solid #AB303F;
+        /* Custom styles for active tab */
+        .tab-button.active {
+            background-color: #ffffff;
+            color: #1d4ed8;
+            border-bottom: 3px solid #3b82f6;
         }
     </style>
 </head>
-<body>
+<body class="p-4 sm:p-8 flex items-center justify-center min-h-screen">
 
-    <div id="app" class="w-full max-w-lg bg-white p-6 sm:p-8 rounded-xl shadow-2xl space-y-6">
-        
-        <!-- Header -->
-        <header class="text-center pb-4 border-b border-gray-100">
-            <h1 class="text-3xl font-extrabold text-gray-800">Latvian VAT Calculator</h1>
-            <p class="text-latvia-red font-semibold mt-1 text-lg">Standard Rate: 21%</p>
-        </header>
+    <div class="w-full max-w-lg bg-white shadow-2xl rounded-xl p-6 sm:p-8 border-t-8 border-blue-600">
 
-        <div class="space-y-4">
-            
-            <!-- Input: Price WITHOUT VAT (Net) -->
-            <div class="input-group">
-                <label for="netAmount" class="block text-sm font-medium text-gray-700 mb-1">Price WITHOUT VAT (Net Price)</label>
-                <div class="relative rounded-lg shadow-sm">
-                    <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                        <span class="text-gray-500">€</span>
+        <!-- Tab Navigation -->
+        <div class="flex border-b border-gray-200 mb-6">
+            <button id="tab-dividend" class="tab-button flex-1 py-3 text-lg font-semibold text-gray-500 hover:text-blue-600 transition duration-150 rounded-t-lg"
+                onclick="showTab('dividend')">
+                Dividendes (UIN)
+            </button>
+            <button id="tab-vat" class="tab-button flex-1 py-3 text-lg font-semibold text-gray-500 hover:text-blue-600 transition duration-150 rounded-t-lg"
+                onclick="showTab('vat')">
+                PVN Kalkulators
+            </button>
+        </div>
+
+        <!-- Dividend Calculator Section -->
+        <div id="dividend-tab-content" class="hidden">
+            <h1 class="text-3xl font-bold text-gray-800 mb-2">Latvijas Dividenžu Izmaksa</h1>
+            <p class="text-gray-500 mb-6">Aprēķiniet neto dividendes pēc UIN nomaksas. (Standarta SIA).</p>
+
+            <!-- Input Section -->
+            <div class="mb-8 p-6 bg-blue-50 rounded-lg border border-blue-200">
+                <label for="grossDistribution" class="block text-sm font-medium text-gray-700 mb-2">
+                    Kopējā peļņa, kas atvēlēta sadalei (Bruto Dividendes, EUR)
+                </label>
+                <div class="mt-1 relative rounded-md shadow-sm">
+                    <input type="number" id="grossDistribution" step="0.01" value="10000.00"
+                        class="block w-full pr-12 py-3 pl-4 border-gray-300 rounded-lg text-lg focus:ring-blue-500 focus:border-blue-500 transition duration-150"
+                        placeholder="piem., 10000.00" oninput="calculateDividends()">
+                    <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                        <span class="text-gray-500 sm:text-sm">EUR</span>
                     </div>
-                    <input type="number" id="netAmount" placeholder="Enter amount" oninput="handleInput('net')"
-                           class="block w-full rounded-lg border border-gray-300 pl-10 pr-4 py-2 text-lg focus:outline-none"
-                           min="0" step="0.01">
                 </div>
             </div>
 
-            <div class="text-center text-lg font-bold text-gray-500">OR</div>
+            <!-- Tax Rules Summary -->
+            <div class="mb-8">
+                <h2 class="text-xl font-semibold text-gray-800 mb-3">Latvijas Nodokļu Noteikums (20/80 Sistēma)</h2>
+                <p class="text-xs mt-3 text-red-500">
+                    UIN tiek aprēķināts kā 20% no bruto sadalāmās summas (kas efektīvi atbilst 25% no neto summas).
+                </p>
+            </div>
 
-            <!-- Input: Price INCLUDING VAT (Gross) -->
-            <div class="input-group">
-                <label for="grossAmount" class="block text-sm font-medium text-gray-700 mb-1">Price INCLUDING VAT (Gross Price)</label>
-                <div class="relative rounded-lg shadow-sm">
-                    <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                        <span class="text-gray-500">€</span>
-                    </div>
-                    <input type="number" id="grossAmount" placeholder="Enter amount" oninput="handleInput('gross')"
-                           class="block w-full rounded-lg border border-gray-300 pl-10 pr-4 py-2 text-lg focus:outline-none"
-                           min="0" step="0.01">
+            <!-- Output Section -->
+            <div id="dividend-results" class="space-y-4">
+                <!-- Corporate Income Tax (CIT) -->
+                <div class="flex justify-between items-center p-4 bg-red-100 rounded-lg">
+                    <div class="font-medium text-red-700">Uzņēmumu Ienākuma Nodoklis (UIN) <span class="text-sm">(20% no Bruto)</span></div>
+                    <div id="citAmount" class="font-bold text-xl text-red-800">0.00 EUR</div>
+                </div>
+
+                <!-- Effective Tax Rate (25%) -->
+                <div class="flex justify-between items-center p-3 bg-gray-100 rounded-lg text-sm">
+                    <div class="font-medium text-gray-600">Efektīvā UIN likme (attiecībā pret neto summu)</div>
+                    <div id="effectiveRate" class="font-bold text-gray-800">0%</div>
+                </div>
+
+                <!-- Net Dividend to Shareholder -->
+                <div class="flex justify-between items-center p-4 bg-green-100 rounded-lg border-2 border-green-500">
+                    <div class="font-medium text-green-700">Neto Dividende Akcionāram <span class="text-sm">(80% no Bruto)</span></div>
+                    <div id="netDividendAmount" class="font-bold text-2xl text-green-800">0.00 EUR</div>
+                </div>
+
+                <!-- Total Check -->
+                <div class="flex justify-between items-center pt-4 border-t border-gray-200 text-sm text-gray-600">
+                    <div>Kopējā Bruto Sadale:</div>
+                    <div id="totalGrossCheck" class="font-semibold">0.00 EUR</div>
                 </div>
             </div>
         </div>
 
-        <!-- Results Display -->
-        <div id="results" class="space-y-4 pt-4 border-t border-gray-100">
-            <h2 class="text-xl font-semibold text-latvia-blue">Calculation Results</h2>
-            
-            <!-- VAT Amount -->
-            <div class="result-card bg-neutral-light p-4 rounded-lg shadow-inner flex justify-between items-center">
-                <span class="font-medium text-gray-700">VAT (21%) Amount:</span>
-                <span id="vatAmountDisplay" class="text-2xl font-bold text-latvia-red">€0.00</span>
-            </div>
-            
-            <!-- Net Price -->
-            <div class="result-card bg-neutral-light p-4 rounded-lg shadow-inner flex justify-between items-center">
-                <span class="font-medium text-gray-700">Net Price:</span>
-                <span id="netResultDisplay" class="text-xl font-bold text-gray-800">€0.00</span>
+        <!-- VAT Calculator Section (Initially NOT Hidden) -->
+        <div id="vat-tab-content">
+            <h1 class="text-3xl font-bold text-gray-800 mb-2">Latvijas PVN Kalkulators</h1>
+            <p class="text-gray-500 mb-6">Aprēķiniet PVN, neto vai bruto summu. (Fiksētā likme: 21%).</p>
+
+            <!-- VAT Rate Display -->
+            <div class="mb-6 p-4 bg-yellow-50 rounded-lg border border-yellow-200">
+                <label class="block text-sm font-medium text-gray-700 mb-2">
+                    Izmantotā PVN likme:
+                </label>
+                <div class="font-bold text-lg text-yellow-700">Standarta (21%)</div>
+                <!-- Hidden input to hold the rate for JS calculation -->
+                <input type="hidden" id="vatRate" value="0.21">
             </div>
 
-            <!-- Gross Price -->
-            <div class="result-card bg-neutral-light p-4 rounded-lg shadow-inner flex justify-between items-center">
-                <span class="font-medium text-gray-700">Gross Price:</span>
-                <span id="grossResultDisplay" class="text-xl font-bold text-gray-800">€0.00</span>
-            </div>
-            
-        </div>
+            <!-- Input Fields: Net or Gross -->
+            <div class="space-y-4 mb-8">
+                <div class="mt-1 relative rounded-md shadow-sm">
+                    <label for="netAmount" class="block text-xs font-medium text-gray-500 mb-1">Summa bez PVN (Neto)</label>
+                    <input type="number" id="netAmount" step="0.01" value="100.00"
+                        class="block w-full pr-12 py-3 pl-4 border-gray-300 rounded-lg text-lg focus:ring-green-500 focus:border-green-500 transition duration-150"
+                        placeholder="100.00" oninput="calculateVAT('net')">
+                    <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                        <span class="text-gray-500 sm:text-sm">EUR</span>
+                    </div>
+                </div>
 
-        <!-- Error/Info Message Box -->
-        <div id="messageBox" class="hidden p-3 rounded-lg bg-yellow-100 text-yellow-700 border border-yellow-300 text-sm">
-            Please enter a positive numeric value in one of the fields.
+                <div class="text-center font-bold text-gray-500">VAI</div>
+
+                <div class="mt-1 relative rounded-md shadow-sm">
+                    <label for="grossAmount" class="block text-xs font-medium text-gray-500 mb-1">Summa ar PVN (Bruto)</label>
+                    <input type="number" id="grossAmount" step="0.01" value="121.00"
+                        class="block w-full pr-12 py-3 pl-4 border-gray-300 rounded-lg text-lg focus:ring-red-500 focus:border-red-500 transition duration-150"
+                        placeholder="121.00" oninput="calculateVAT('gross')">
+                    <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                        <span class="text-gray-500 sm:text-sm">EUR</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- VAT Output Section -->
+            <div id="vat-results" class="space-y-4">
+                <!-- VAT Amount -->
+                <div class="flex justify-between items-center p-4 bg-blue-100 rounded-lg">
+                    <div class="font-medium text-blue-700">Pievienotās Vērtības Nodoklis (PVN)</div>
+                    <div id="vatAmount" class="font-bold text-xl text-blue-800">0.00 EUR</div>
+                </div>
+                
+                <!-- Net Result -->
+                <div class="flex justify-between items-center p-4 bg-green-100 rounded-lg border-2 border-green-500">
+                    <div class="font-medium text-green-700">Rezultāts bez PVN (Neto)</div>
+                    <div id="resultNet" class="font-bold text-xl text-green-800">0.00 EUR</div>
+                </div>
+
+                <!-- Gross Result -->
+                <div class="flex justify-between items-center p-4 bg-red-100 rounded-lg border-2 border-red-500">
+                    <div class="font-medium text-red-700">Rezultāts ar PVN (Bruto)</div>
+                    <div id="resultGross" class="font-bold text-xl text-red-800">0.00 EUR</div>
+                </div>
+            </div>
         </div>
-        
     </div>
 
     <script>
-        // Constants for Latvian VAT
-        const VAT_RATE = 0.21; // 21%
-        const VAT_FACTOR = 1 + VAT_RATE;
-
-        // Get DOM elements
-        const netInput = document.getElementById('netAmount');
-        const grossInput = document.getElementById('grossAmount');
-        const vatDisplay = document.getElementById('vatAmountDisplay');
-        const netResultDisplay = document.getElementById('netResultDisplay');
-        const grossResultDisplay = document.getElementById('grossResultDisplay');
-        const messageBox = document.getElementById('messageBox');
+        // Constants for the tax calculation
+        const CIT_RATE_ON_GROSS = 0.20; // 20% CIT on the gross distributed amount
 
         /**
-         * Formats a number to a currency string with 2 decimal places and the Euro symbol.
-         * @param {number} amount - The numeric amount.
-         * @returns {string} - The formatted string (e.g., "€12.34").
+         * Formats a number to EUR currency string (Latvian locale).
+         * @param {number} value
+         * @returns {string}
          */
-        const formatCurrency = (amount) => {
-            if (isNaN(amount) || amount === null) return '€0.00';
-            return `€${amount.toFixed(2)}`;
-        };
+        function formatCurrency(value) {
+            return value.toLocaleString('lv-LV', {
+                style: 'currency',
+                currency: 'EUR',
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2,
+            });
+        }
 
-        /**
-         * Clears all displays and results.
-         */
-        const clearResults = () => {
-            vatDisplay.textContent = formatCurrency(0);
-            netResultDisplay.textContent = formatCurrency(0);
-            grossResultDisplay.textContent = formatCurrency(0);
-            messageBox.classList.add('hidden');
-        };
+        // --- Dividend Calculator Logic ---
 
-        /**
-         * Main calculation handler.
-         * @param {string} source - 'net' or 'gross' to indicate which field triggered the calculation.
-         */
-        function handleInput(source) {
-            let inputElement = (source === 'net') ? netInput : grossInput;
-            let value = parseFloat(inputElement.value);
+        function calculateDividends() {
+            const grossInput = document.getElementById('grossDistribution');
+            const grossDistribution = parseFloat(grossInput.value) || 0;
 
-            // Clear the other input field to ensure only one calculation path is active
-            if (source === 'net') {
-                grossInput.value = '';
-            } else {
-                netInput.value = '';
-            }
-            
-            // Handle invalid or empty input
-            if (isNaN(value) || value <= 0) {
-                clearResults();
-                if (inputElement.value !== '') {
-                    messageBox.classList.remove('hidden');
-                }
+            const citAmountElement = document.getElementById('citAmount');
+            const netDividendAmountElement = document.getElementById('netDividendAmount');
+            const totalGrossCheckElement = document.getElementById('totalGrossCheck');
+            const effectiveRateElement = document.getElementById('effectiveRate');
+
+            if (grossDistribution < 0) {
+                citAmountElement.textContent = formatCurrency(0);
+                netDividendAmountElement.textContent = formatCurrency(0);
+                totalGrossCheckElement.textContent = formatCurrency(0);
+                effectiveRateElement.textContent = "0%";
+                grossInput.value = 0.00;
                 return;
             }
 
-            messageBox.classList.add('hidden');
+            // 1. Calculate Corporate Income Tax (CIT) - 20% of the Gross Distribution
+            const citAmount = grossDistribution * CIT_RATE_ON_GROSS;
 
-            let net = 0;
-            let gross = 0;
+            // 2. Calculate Net Dividend - Remaining 80%
+            const netDividend = grossDistribution - citAmount;
             
-            if (source === 'net') {
-                // Calculation: Net to Gross
-                net = value;
-                gross = net * VAT_FACTOR;
+            // 3. Calculate Effective Rate (CIT / Net Dividend)
+            let effectiveRate = 0;
+            if (netDividend > 0) {
+                effectiveRate = (citAmount / netDividend) * 100;
             } else {
-                // Calculation: Gross to Net
-                gross = value;
-                net = gross / VAT_FACTOR;
+                 effectiveRate = 0;
             }
 
-            // Calculate VAT amount
-            const vatAmount = gross - net;
-
-            // Update displays
-            vatDisplay.textContent = formatCurrency(vatAmount);
-            netResultDisplay.textContent = formatCurrency(net);
-            grossResultDisplay.textContent = formatCurrency(gross);
+            const effectiveRateDisplay = isFinite(effectiveRate) ? `${effectiveRate.toFixed(0)}%` : 'N/A';
+            
+            // 4. Update the UI
+            citAmountElement.textContent = formatCurrency(citAmount);
+            netDividendAmountElement.textContent = formatCurrency(netDividend);
+            totalGrossCheckElement.textContent = formatCurrency(grossDistribution);
+            effectiveRateElement.textContent = effectiveRateDisplay;
         }
 
-        // Initialize display on load
-        clearResults();
+        // --- VAT Calculator Logic ---
 
-        // Optional: Pre-populate an initial value for demonstration
-        netInput.value = '100.00';
-        handleInput('net');
+        /**
+         * Calculates VAT, Net, and Gross amounts based on user input.
+         * @param {string} source - 'net' or 'gross' to indicate which field was edited.
+         */
+        function calculateVAT(source = 'net') {
+            const netInput = document.getElementById('netAmount');
+            const grossInput = document.getElementById('grossAmount');
+            // The rate is now fixed in a hidden input field
+            const rateSelector = document.getElementById('vatRate'); 
+
+            const rate = parseFloat(rateSelector.value); // Should be 0.21
+            let netAmount = parseFloat(netInput.value) || 0;
+            let grossAmount = parseFloat(grossInput.value) || 0;
+
+            const resultNetElement = document.getElementById('resultNet');
+            const resultGrossElement = document.getElementById('resultGross');
+            const vatAmountElement = document.getElementById('vatAmount');
+
+            if (source === 'net') {
+                // Calculation: Net -> Gross
+                if (netAmount < 0) netAmount = 0;
+                grossAmount = netAmount * (1 + rate);
+                grossInput.value = grossAmount.toFixed(2);
+
+            } else if (source === 'gross') {
+                // Calculation: Gross -> Net
+                if (grossAmount < 0) grossAmount = 0;
+                netAmount = grossAmount / (1 + rate);
+                netInput.value = netAmount.toFixed(2);
+            }
+
+            const vatAmount = grossAmount - netAmount;
+
+            // Update Results UI
+            resultNetElement.textContent = formatCurrency(netAmount);
+            resultGrossElement.textContent = formatCurrency(grossAmount);
+            vatAmountElement.textContent = formatCurrency(vatAmount);
+        }
+
+        // --- Tab Switching Logic ---
+
+        function showTab(tabName) {
+            const dividendContent = document.getElementById('dividend-tab-content');
+            const vatContent = document.getElementById('vat-tab-content');
+            const dividendTab = document.getElementById('tab-dividend');
+            const vatTab = document.getElementById('tab-vat');
+
+            if (tabName === 'dividend') {
+                dividendContent.classList.remove('hidden');
+                vatContent.classList.add('hidden');
+                dividendTab.classList.add('active');
+                vatTab.classList.remove('active');
+                calculateDividends();
+            } else if (tabName === 'vat') {
+                vatContent.classList.remove('hidden');
+                dividendContent.classList.add('hidden');
+                vatTab.classList.add('active');
+                dividendTab.classList.remove('active');
+                calculateVAT();
+            }
+        }
+
+        // Initialize on load
+        window.onload = function() {
+            showTab('vat'); // <-- Changed default tab to 'vat'
+        };
 
     </script>
 </body>
