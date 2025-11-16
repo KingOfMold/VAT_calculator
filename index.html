@@ -25,22 +25,25 @@
 
         <!-- Tab Navigation -->
         <div class="flex border-b border-gray-200 mb-6">
-            <button id="tab-dividend" class="tab-button flex-1 py-3 text-lg font-semibold text-gray-500 hover:text-blue-600 transition duration-150 rounded-t-lg"
-                onclick="showTab('dividend')">
-                Dividendes (UIN)
-            </button>
             <button id="tab-vat" class="tab-button flex-1 py-3 text-lg font-semibold text-gray-500 hover:text-blue-600 transition duration-150 rounded-t-lg"
                 onclick="showTab('vat')">
-                PVN Kalkulators
+                PVN
+            </button>
+            <button id="tab-dividend" class="tab-button flex-1 py-3 text-lg font-semibold text-gray-500 hover:text-blue-600 transition duration-150 rounded-t-lg"
+                onclick="showTab('dividend')">
+                Dividendes
+            </button>
+            <button id="tab-percentage" class="tab-button flex-1 py-3 text-lg font-semibold text-gray-500 hover:text-blue-600 transition duration-150 rounded-t-lg"
+                onclick="showTab('percentage')">
+                Procenti
             </button>
         </div>
 
         <!-- Dividend Calculator Section -->
         <div id="dividend-tab-content" class="hidden">
+            <!-- ... (Dividend content remains unchanged) ... -->
             <h1 class="text-3xl font-bold text-gray-800 mb-2">Latvijas Dividenžu Izmaksa</h1>
             <p class="text-gray-500 mb-6">Aprēķiniet neto dividendes pēc UIN nomaksas. (Standarta SIA).</p>
-
-            <!-- Input Section -->
             <div class="mb-8 p-6 bg-blue-50 rounded-lg border border-blue-200">
                 <label for="grossDistribution" class="block text-sm font-medium text-gray-700 mb-2">
                     Kopējā peļņa, kas atvēlēta sadalei (Bruto Dividendes, EUR)
@@ -54,36 +57,25 @@
                     </div>
                 </div>
             </div>
-
-            <!-- Tax Rules Summary -->
             <div class="mb-8">
                 <h2 class="text-xl font-semibold text-gray-800 mb-3">Latvijas Nodokļu Noteikums (20/80 Sistēma)</h2>
                 <p class="text-xs mt-3 text-red-500">
                     UIN tiek aprēķināts kā 20% no bruto sadalāmās summas (kas efektīvi atbilst 25% no neto summas).
                 </p>
             </div>
-
-            <!-- Output Section -->
             <div id="dividend-results" class="space-y-4">
-                <!-- Corporate Income Tax (CIT) -->
                 <div class="flex justify-between items-center p-4 bg-red-100 rounded-lg">
                     <div class="font-medium text-red-700">Uzņēmumu Ienākuma Nodoklis (UIN) <span class="text-sm">(20% no Bruto)</span></div>
                     <div id="citAmount" class="font-bold text-xl text-red-800">0.00 EUR</div>
                 </div>
-
-                <!-- Effective Tax Rate (25%) -->
                 <div class="flex justify-between items-center p-3 bg-gray-100 rounded-lg text-sm">
                     <div class="font-medium text-gray-600">Efektīvā UIN likme (attiecībā pret neto summu)</div>
                     <div id="effectiveRate" class="font-bold text-gray-800">0%</div>
                 </div>
-
-                <!-- Net Dividend to Shareholder -->
                 <div class="flex justify-between items-center p-4 bg-green-100 rounded-lg border-2 border-green-500">
                     <div class="font-medium text-green-700">Neto Dividende Akcionāram <span class="text-sm">(80% no Bruto)</span></div>
                     <div id="netDividendAmount" class="font-bold text-2xl text-green-800">0.00 EUR</div>
                 </div>
-
-                <!-- Total Check -->
                 <div class="flex justify-between items-center pt-4 border-t border-gray-200 text-sm text-gray-600">
                     <div>Kopējā Bruto Sadale:</div>
                     <div id="totalGrossCheck" class="font-semibold">0.00 EUR</div>
@@ -93,20 +85,16 @@
 
         <!-- VAT Calculator Section (Initially NOT Hidden) -->
         <div id="vat-tab-content">
+            <!-- ... (VAT content remains unchanged) ... -->
             <h1 class="text-3xl font-bold text-gray-800 mb-2">Latvijas PVN Kalkulators</h1>
             <p class="text-gray-500 mb-6">Aprēķiniet PVN, neto vai bruto summu. (Fiksētā likme: 21%).</p>
-
-            <!-- VAT Rate Display -->
             <div class="mb-6 p-4 bg-yellow-50 rounded-lg border border-yellow-200">
                 <label class="block text-sm font-medium text-gray-700 mb-2">
                     Izmantotā PVN likme:
                 </label>
                 <div class="font-bold text-lg text-yellow-700">Standarta (21%)</div>
-                <!-- Hidden input to hold the rate for JS calculation -->
                 <input type="hidden" id="vatRate" value="0.21">
             </div>
-
-            <!-- Input Fields: Net or Gross -->
             <div class="space-y-4 mb-8">
                 <div class="mt-1 relative rounded-md shadow-sm">
                     <label for="netAmount" class="block text-xs font-medium text-gray-500 mb-1">Summa bez PVN (Neto)</label>
@@ -117,9 +105,7 @@
                         <span class="text-gray-500 sm:text-sm">EUR</span>
                     </div>
                 </div>
-
                 <div class="text-center font-bold text-gray-500">VAI</div>
-
                 <div class="mt-1 relative rounded-md shadow-sm">
                     <label for="grossAmount" class="block text-xs font-medium text-gray-500 mb-1">Summa ar PVN (Bruto)</label>
                     <input type="number" id="grossAmount" step="0.01" value="121.00"
@@ -130,28 +116,94 @@
                     </div>
                 </div>
             </div>
-
-            <!-- VAT Output Section -->
             <div id="vat-results" class="space-y-4">
-                <!-- VAT Amount -->
                 <div class="flex justify-between items-center p-4 bg-blue-100 rounded-lg">
                     <div class="font-medium text-blue-700">Pievienotās Vērtības Nodoklis (PVN)</div>
                     <div id="vatAmount" class="font-bold text-xl text-blue-800">0.00 EUR</div>
                 </div>
-                
-                <!-- Net Result -->
                 <div class="flex justify-between items-center p-4 bg-green-100 rounded-lg border-2 border-green-500">
                     <div class="font-medium text-green-700">Rezultāts bez PVN (Neto)</div>
                     <div id="resultNet" class="font-bold text-xl text-green-800">0.00 EUR</div>
                 </div>
-
-                <!-- Gross Result -->
                 <div class="flex justify-between items-center p-4 bg-red-100 rounded-lg border-2 border-red-500">
                     <div class="font-medium text-red-700">Rezultāts ar PVN (Bruto)</div>
                     <div id="resultGross" class="font-bold text-xl text-red-800">0.00 EUR</div>
                 </div>
             </div>
         </div>
+
+        <!-- Percentage Calculator Section (Initially Hidden) -->
+        <div id="percentage-tab-content" class="hidden">
+            <h1 class="text-3xl font-bold text-gray-800 mb-2">Procentu Kalkulators</h1>
+            <p class="text-gray-500 mb-6">Ātri aprēķiniet procentus vai summas.</p>
+
+            <!-- Section 1: Find Percentage from Difference (User's Example) -->
+            <div class="mb-8 p-6 bg-blue-50 rounded-lg border border-blue-200">
+                <h2 class="text-lg font-semibold text-gray-800 mb-4">Aprēķināt Starpības Procentu (piem. Nodokli)</h2>
+                <div class="space-y-4">
+                    <div class="mt-1 relative rounded-md shadow-sm">
+                        <label for="percTotal" class="block text-xs font-medium text-gray-500 mb-1">Kopējā summa (Pirms)</label>
+                        <input type="number" id="percTotal" step="0.01" value="3915.00"
+                            class="block w-full pr-12 py-3 pl-4 border-gray-300 rounded-lg text-lg focus:ring-blue-500 focus:border-blue-500 transition duration-150"
+                            placeholder="3915.00" oninput="calculateDifferencePercentage()">
+                        <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                            <span class="text-gray-500 sm:text-sm">EUR</span>
+                        </div>
+                    </div>
+                    <div class="mt-1 relative rounded-md shadow-sm">
+                        <label for="percAfter" class="block text-xs font-medium text-gray-500 mb-1">Summa pēc (Pēc)</label>
+                        <input type="number" id="percAfter" step="0.01" value="2360.00"
+                            class="block w-full pr-12 py-3 pl-4 border-gray-300 rounded-lg text-lg focus:ring-blue-500 focus:border-blue-500 transition duration-150"
+                            placeholder="2360.00" oninput="calculateDifferencePercentage()">
+                        <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                            <span class="text-gray-500 sm:text-sm">EUR</span>
+                        </div>
+                    </div>
+                    <!-- Difference Amount Result -->
+                    <div class="flex justify-between items-center p-4 bg-gray-100 rounded-lg">
+                        <div class="font-medium text-gray-700">Starpības Summa (Nodoklis)</div>
+                        <div id="percDifferenceAmount" class="font-bold text-xl text-gray-800">0.00 EUR</div>
+                    </div>
+                    <!-- Percentage Result -->
+                    <div class="flex justify-between items-center p-4 bg-green-100 rounded-lg border-2 border-green-500">
+                        <div class="font-medium text-green-700">Rezultāts (Procentos)</div>
+                        <div id="percPercentageResult" class="font-bold text-2xl text-green-800">0.0 %</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 2: Find Value from Percentage -->
+            <div class="mb-4 p-6 bg-yellow-50 rounded-lg border border-yellow-200">
+                <h2 class="text-lg font-semibold text-gray-800 mb-4">Cik ir [X] % no [Y]?</h2>
+                <div class="space-y-4">
+                    <div class="mt-1 relative rounded-md shadow-sm">
+                        <label for="percentageInput" class="block text-xs font-medium text-gray-500 mb-1">Procenti (X)</label>
+                        <input type="number" id="percentageInput" step="0.01" value="10.00"
+                            class="block w-full pr-12 py-3 pl-4 border-gray-300 rounded-lg text-lg focus:ring-yellow-500 focus:border-yellow-500 transition duration-150"
+                            placeholder="10.0" oninput="calculateValueFromPercentage()">
+                        <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                            <span class="text-gray-500 sm:text-sm">%</span>
+                        </div>
+                    </div>
+                    <div class="mt-1 relative rounded-md shadow-sm">
+                        <label for="totalAmountValue" class="block text-xs font-medium text-gray-500 mb-1">Kopējā summa (Y)</label>
+                        <input type="number" id="totalAmountValue" step="0.01" value="1000.00"
+                            class="block w-full pr-12 py-3 pl-4 border-gray-300 rounded-lg text-lg focus:ring-yellow-500 focus:border-yellow-500 transition duration-150"
+                            placeholder="1000.00" oninput="calculateValueFromPercentage()">
+                        <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                            <span class="text-gray-500 sm:text-sm">EUR</span>
+                        </div>
+                    </div>
+                    <!-- Value Result -->
+                    <div class="flex justify-between items-center p-4 bg-green-100 rounded-lg border-2 border-green-500">
+                        <div class="font-medium text-green-700">Rezultāts (Summa)</div>
+                        <div id="valueResult" class="font-bold text-2xl text-green-800">0.00 EUR</div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
     </div>
 
     <script>
@@ -171,18 +223,29 @@
                 maximumFractionDigits: 2,
             });
         }
+         /**
+         * Formats a number to a Percentage string (e.g., 39.7%).
+         * @param {number} value
+         * @returns {string}
+         */
+        function formatPercentage(value) {
+             return value.toLocaleString('lv-LV', {
+                minimumFractionDigits: 1, // Changed to 1
+                maximumFractionDigits: 1, // Changed to 1
+            }) + ' %';
+        }
+
 
         // --- Dividend Calculator Logic ---
 
         function calculateDividends() {
+            // ... (Dividend logic remains unchanged) ...
             const grossInput = document.getElementById('grossDistribution');
             const grossDistribution = parseFloat(grossInput.value) || 0;
-
             const citAmountElement = document.getElementById('citAmount');
             const netDividendAmountElement = document.getElementById('netDividendAmount');
             const totalGrossCheckElement = document.getElementById('totalGrossCheck');
             const effectiveRateElement = document.getElementById('effectiveRate');
-
             if (grossDistribution < 0) {
                 citAmountElement.textContent = formatCurrency(0);
                 netDividendAmountElement.textContent = formatCurrency(0);
@@ -191,24 +254,15 @@
                 grossInput.value = 0.00;
                 return;
             }
-
-            // 1. Calculate Corporate Income Tax (CIT) - 20% of the Gross Distribution
             const citAmount = grossDistribution * CIT_RATE_ON_GROSS;
-
-            // 2. Calculate Net Dividend - Remaining 80%
             const netDividend = grossDistribution - citAmount;
-            
-            // 3. Calculate Effective Rate (CIT / Net Dividend)
             let effectiveRate = 0;
             if (netDividend > 0) {
                 effectiveRate = (citAmount / netDividend) * 100;
             } else {
                  effectiveRate = 0;
             }
-
             const effectiveRateDisplay = isFinite(effectiveRate) ? `${effectiveRate.toFixed(0)}%` : 'N/A';
-            
-            // 4. Update the UI
             citAmountElement.textContent = formatCurrency(citAmount);
             netDividendAmountElement.textContent = formatCurrency(netDividend);
             totalGrossCheckElement.textContent = formatCurrency(grossDistribution);
@@ -217,71 +271,135 @@
 
         // --- VAT Calculator Logic ---
 
-        /**
-         * Calculates VAT, Net, and Gross amounts based on user input.
-         * @param {string} source - 'net' or 'gross' to indicate which field was edited.
-         */
         function calculateVAT(source = 'net') {
+            // ... (VAT logic remains unchanged) ...
             const netInput = document.getElementById('netAmount');
             const grossInput = document.getElementById('grossAmount');
-            // The rate is now fixed in a hidden input field
             const rateSelector = document.getElementById('vatRate'); 
-
-            const rate = parseFloat(rateSelector.value); // Should be 0.21
+            const rate = parseFloat(rateSelector.value); // 0.21
             let netAmount = parseFloat(netInput.value) || 0;
             let grossAmount = parseFloat(grossInput.value) || 0;
-
             const resultNetElement = document.getElementById('resultNet');
             const resultGrossElement = document.getElementById('resultGross');
             const vatAmountElement = document.getElementById('vatAmount');
-
             if (source === 'net') {
-                // Calculation: Net -> Gross
                 if (netAmount < 0) netAmount = 0;
                 grossAmount = netAmount * (1 + rate);
                 grossInput.value = grossAmount.toFixed(2);
-
             } else if (source === 'gross') {
-                // Calculation: Gross -> Net
                 if (grossAmount < 0) grossAmount = 0;
                 netAmount = grossAmount / (1 + rate);
                 netInput.value = netAmount.toFixed(2);
             }
-
             const vatAmount = grossAmount - netAmount;
-
-            // Update Results UI
             resultNetElement.textContent = formatCurrency(netAmount);
             resultGrossElement.textContent = formatCurrency(grossAmount);
             vatAmountElement.textContent = formatCurrency(vatAmount);
         }
 
+        // --- Percentage Calculator Logic ---
+
+        /**
+         * Calculates percentage based on Total and After (as per user image)
+         */
+        function calculateDifferencePercentage() {
+            const totalInput = document.getElementById('percTotal');
+            const afterInput = document.getElementById('percAfter');
+            const diffAmountElement = document.getElementById('percDifferenceAmount');
+            const percResultElement = document.getElementById('percPercentageResult');
+
+            let total = parseFloat(totalInput.value) || 0;
+            let after = parseFloat(afterInput.value) || 0;
+
+            if (total < 0) total = 0;
+            if (after < 0) after = 0;
+            
+            let difference = total - after;
+            
+            let percentage = 0;
+            if (total > 0) {
+                percentage = (difference / total) * 100;
+            }
+            
+            // Handle case where "after" is larger than "total"
+            if (difference < 0) {
+                difference = 0;
+                percentage = 0;
+            }
+
+            diffAmountElement.textContent = formatCurrency(difference);
+            percResultElement.textContent = formatPercentage(percentage);
+        }
+
+        /**
+         * Calculates "What is X % of Y"
+         */
+        function calculateValueFromPercentage() {
+            const percentageInput = document.getElementById('percentageInput');
+            const totalInput = document.getElementById('totalAmountValue');
+            const resultElement = document.getElementById('valueResult');
+            
+            let percentage = parseFloat(percentageInput.value) || 0;
+            let total = parseFloat(totalInput.value) || 0;
+
+            if (percentage < 0) percentage = 0;
+            if (total < 0) total = 0;
+
+            const resultValue = (total * percentage) / 100;
+
+            resultElement.textContent = formatCurrency(resultValue);
+        }
+
+
         // --- Tab Switching Logic ---
 
         function showTab(tabName) {
+            // Get all content divs
             const dividendContent = document.getElementById('dividend-tab-content');
             const vatContent = document.getElementById('vat-tab-content');
+            const percentageContent = document.getElementById('percentage-tab-content');
+
+            // Get all tab buttons
             const dividendTab = document.getElementById('tab-dividend');
             const vatTab = document.getElementById('tab-vat');
+            const percentageTab = document.getElementById('tab-percentage');
 
+            // Hide all content
+            dividendContent.classList.add('hidden');
+            vatContent.classList.add('hidden');
+            percentageContent.classList.add('hidden');
+
+            // Deactivate all tabs
+            dividendTab.classList.remove('active');
+            vatTab.classList.remove('active');
+            percentageTab.classList.remove('active');
+            
+            // Activate the correct tab
             if (tabName === 'dividend') {
                 dividendContent.classList.remove('hidden');
-                vatContent.classList.add('hidden');
                 dividendTab.classList.add('active');
-                vatTab.classList.remove('active');
                 calculateDividends();
             } else if (tabName === 'vat') {
                 vatContent.classList.remove('hidden');
-                dividendContent.classList.add('hidden');
                 vatTab.classList.add('active');
-                dividendTab.classList.remove('active');
                 calculateVAT();
+            } else if (tabName === 'percentage') {
+                percentageContent.classList.remove('hidden');
+                percentageTab.classList.add('active');
+                // Calculate both sections on tab load
+                calculateDifferencePercentage(); // Changed from calculatePercentage
+                calculateValueFromPercentage();
             }
         }
 
         // Initialize on load
         window.onload = function() {
-            showTab('vat'); // <-- Changed default tab to 'vat'
+            showTab('vat'); // <-- Default tab is still 'vat'
+            // Pre-calculate all tabs on load
+            calculateDividends();
+            calculateVAT();
+            calculateDifferencePercentage();
+            calculateValueFromPercentage();
         };
 
     </script>
